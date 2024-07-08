@@ -1,10 +1,10 @@
 package com.rts.rest.api.employee.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.rts.rest.api.employee.dao.EmployeeRepository;
 import com.rts.rest.api.employee.entity.Employee;
@@ -26,19 +26,24 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee findById(int id) {
-        return employeeRepository.findById(id);
+        Optional<Employee> findEmployee = employeeRepository.findById(id);
+        
+        Employee theEmployee = null;
+
+        if(findEmployee.isPresent()){
+            theEmployee = findEmployee.get();
+        }
+
+        return theEmployee;
     }
 
     @Override
-    @Transactional
     public Employee save(Employee employee) {
         return employeeRepository.save(employee);
     }
 
     @Override
-    @Transactional
     public void deleteById(int id) {
-        // TODO Auto-generated method stub
         employeeRepository.deleteById(id);
     }
 

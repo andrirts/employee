@@ -1,15 +1,9 @@
 package com.rts.rest.api.employee.dao;
 
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.rts.rest.api.employee.entity.Employee;
 
-public interface EmployeeRepository {
-    List<Employee> findAll();
-
-    Employee findById(int id);
-
-    Employee save(Employee employee);
-
-    void deleteById(int id);
+public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
+  
 }
